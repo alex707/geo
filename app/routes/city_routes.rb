@@ -1,12 +1,10 @@
 class CityRoutes < Application
-  namespace '/v1' do
-    get do
-    	if params[:city]
-      	json Geocoder.geocode(params[:city])
-      else
-      	status 404
-      	json ([])
-    	end
+  get '/' do
+    if params[:name]
+      json Geocoder.geocode(params[:name])
+    else
+      status 404
+      json ([])
     end
   end
 end
