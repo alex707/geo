@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+# need to give chmod 755 bin/app
+
+puts 'Application starting...'
+
+require_relative '../config/environment'
+
+puts "* Environment: #{Application.environment}"
+puts '* Started'
+puts 'Use Ctrl-C to stop'
+
+begin
+  loop { sleep 3 }
+rescue Interrupt
+  puts '- Stopped successfully'
+end

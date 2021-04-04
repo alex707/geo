@@ -1,5 +1,6 @@
 RSpec.describe Geocoder do
   subject { described_class }
+
   before { stub_const("#{described_class}::DATA_PATH", "#{File.expand_path('..', __dir__)}/fixtures/city.csv") }
 
   describe '.geocode' do
