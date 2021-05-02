@@ -1,5 +1,5 @@
 channel = RabbitMq.consumer_channel
-queue = channel.queue('geo', durable: true)
+queue = channel.queue('geocoding', durable: true)
 
 # manual_ack: true - вручную обновление подтверждение обраб сообщения
 # (после того, как успешного вызовем rpc процедуру на стороне ads,
@@ -8,7 +8,7 @@ queue.subscribe(manual_ack: true) do |delivery_info, properties, payload|
   payload = JSON(payload)
   coordinates = Geocoder.geocode(payload['city_name'])
 
-  if coordinates.present?
+  if coordinates.compact.any?
     client = AdsService::RpcClient.fetch
     client.update_coordinates(payload['id'], coordinates)
 
